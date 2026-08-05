@@ -6,7 +6,15 @@ import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import AccessTimeIcon from "@mui/icons-material/AutoAwesome";
 import Button from "@mui/material/Button";
 import EastIcon from "@mui/icons-material/East";
+import { useNavigate } from "react-router-dom";
+
 export default function Home() {
+  const navigate = useNavigate();
+
+  function handleBtnClick(target: string) {
+    navigate(target);
+  }
+
   return (
     <Container sx={{ marginBottom: 15 }}>
       <CurrentCountry />
@@ -31,7 +39,12 @@ export default function Home() {
               description="Start your day with a meaningful verse from the Quran."
             >
               <AutoStoriesIcon />
-              <Button variant="contained">
+              <Button
+                variant="contained"
+                onClick={() => {
+                  handleBtnClick("quraan-message");
+                }}
+              >
                 Open Quraan Message
                 <EastIcon sx={{ fontSize: 18, marginInlineStart: 1 }} />
               </Button>
@@ -41,7 +54,15 @@ export default function Home() {
               description="Keep track of your daily Dhikr easily."
             >
               <AccessTimeIcon />
-              <Button variant="outlined">Start Tasbeeh</Button>
+
+              <Button
+                variant="outlined"
+                onClick={() => {
+                  handleBtnClick("tasbeeh");
+                }}
+              >
+                Start Tasbeeh
+              </Button>
             </OtherPagesCard>
           </Stack>
         </Grid>

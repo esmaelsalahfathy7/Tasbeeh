@@ -1,6 +1,5 @@
-import * as React from "react";
 import { alpha } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 // Importing MUI components
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -17,11 +16,11 @@ import SettingsIcon from "@mui/icons-material/Settings";
 
 // Defining the navigation pages for desktop view and mobile view with icons
 const pagesData = [
-  { id: 1, title: "Home", target: "" },
-  { id: 2, title: "Prayers", target: "prayer-times" },
-  { id: 3, title: "Quraan", target: "quraan-message" },
-  { id: 4, title: "Tasbeeh", target: "tasbeeh" },
-  { id: 5, title: "Settings", target: "settings" },
+  { id: 1, title: "Home", target: "/" },
+  { id: 2, title: "Prayers", target: "/prayer-times" },
+  { id: 3, title: "Quraan", target: "/quraan-message" },
+  { id: 4, title: "Tasbeeh", target: "/tasbeeh" },
+  { id: 5, title: "Settings", target: "/settings" },
 ];
 
 const pagesDataMobile = [
@@ -35,13 +34,10 @@ const pagesDataMobile = [
 // ---------- // ------------------ // ----------
 // Main CustomHeader component that renders the navigation bar with responsive design
 export default function CustomHeader() {
-  const [activePage, setActivePage] = React.useState<string>(
-    window.location.pathname === "/" ? "" : window.location.pathname.slice(1),
-  );
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const handlePageClick = (page: string) => {
-    setActivePage(page);
     navigate(page);
   };
 
@@ -99,7 +95,7 @@ export default function CustomHeader() {
               <Button
                 onClick={() => handlePageClick(page.target)}
                 key={page.id}
-                className={activePage === page.target ? "active" : ""}
+                className={pathname === page.target ? "active" : ""}
                 sx={(theme) => ({
                   my: 2,
                   color: "text.primary",
@@ -138,7 +134,7 @@ export default function CustomHeader() {
               <Button
                 onClick={() => handlePageClick(page.target)}
                 key={page.id}
-                className={activePage === page.target ? "active" : ""}
+                className={pathname === page.target ? "active" : ""}
                 sx={(theme) => ({
                   my: 1,
                   color: "text.primary",
