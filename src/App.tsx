@@ -1,11 +1,11 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import QuraanMessage from "./pages/QuraanMessage";
 import Tasbeeh from "./pages/Tasbeeh";
-import Settings from "./pages/Settings";
+import Settings from "./pages/Settings/Settings";
 import Layout from "./Layout";
-import PrayerTimes from "./pages/PrayerTimes";
+import PrayerTimes from "./pages/PrayerTimes/PrayerTimes";
 
 function App() {
   return (
