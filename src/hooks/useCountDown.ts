@@ -24,7 +24,6 @@ function getSecondsToNextPrayer(
   } else {
     nextPrayTime = dayjs(prayerTimesData?.[nextPrayerTitle], "HH:mm");
   }
-
   return nextPrayTime.diff(currentTime, "seconds");
 }
 

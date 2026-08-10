@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Container, Box, Stack } from "@mui/material";
-import { Grid, keyframes } from "@mui/system";
+import { Grid } from "@mui/system";
 
 /* colors */
 import { colors } from "../theme/Colors";
@@ -24,6 +24,8 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 
 /* Custom Hook To Get Prayer Times Data */
 import usePrayerTimeData from "../hooks/usePrayerTimeData";
+
+import { pulse, ping } from "../utilities/animation";
 
 dayjs.extend(customParseFormat);
 
@@ -66,33 +68,6 @@ const cards = [
   },
 ];
 
-const pulse = keyframes`
-  0% {
-    transform: scale(1);
-  }
-
-  30% {
-    transform: scale(0.90);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-`;
-
-const ping = keyframes`
-  0% {
-    transform: scale(0.3);
-    opacity: 1;
-  }
-
-  75%,
-  100% {
-    transform: scale(1.1);
-    opacity: 0;
-  }
-`;
-
 export default function PrayerTimesCards({
   isColumns,
 }: {
@@ -114,33 +89,41 @@ export default function PrayerTimesCards({
   }
   const dotColor = colors.primary[500];
 
-  if (!isColumns) {
-    return (
-      <Container>
-        <Stack
-          direction="row"
-          spacing={2}
-          sx={{ justifyContent: "space-between", alignItems: "center", mb: 3 }}
+  return (
+    <Container>
+      <Stack
+        direction="row"
+        spacing={2}
+        sx={{
+          justifyContent: "space-between",
+          alignItems: "center",
+          mb: 3,
+          "@media (max-width: 564px)": {
+            flexDirection: "column",
+            gap: 2,
+          },
+        }}
+      >
+        <Typography
+          variant="h5"
+          sx={{ fontFamily: "Literata, serif", color: "primary.dark" }}
         >
-          <Typography
-            variant="h5"
-            sx={{ fontFamily: "Literata, serif", color: "primary.dark" }}
-          >
-            Prayer Times
-          </Typography>
-          <Typography
-            variant="caption"
-            sx={{
-              bgcolor: colors.primary[100],
-              px: 2,
-              borderRadius: 5,
-              color: colors.primary[800],
-              fontWeight: "bold",
-            }}
-          >
-            {currentDate}
-          </Typography>
-        </Stack>
+          Prayer Times
+        </Typography>
+        <Typography
+          variant="caption"
+          sx={{
+            bgcolor: colors.primary[100],
+            px: 2,
+            borderRadius: 5,
+            color: colors.primary[800],
+            fontWeight: "bold",
+          }}
+        >
+          {currentDate}
+        </Typography>
+      </Stack>
+      {!isColumns ? (
         <Grid container spacing={2}>
           {data.map((card) => (
             <Grid key={card.id} size={{ xs: 6, md: 4 }}>
@@ -238,35 +221,7 @@ export default function PrayerTimesCards({
             </Grid>
           ))}
         </Grid>
-      </Container>
-    );
-  } else {
-    return (
-      <Container>
-        <Stack
-          direction="row"
-          spacing={2}
-          sx={{ justifyContent: "space-between", alignItems: "center", mb: 3 }}
-        >
-          <Typography
-            variant="h5"
-            sx={{ fontFamily: "Literata, serif", color: "primary.dark" }}
-          >
-            Prayer Times
-          </Typography>
-          <Typography
-            variant="caption"
-            sx={{
-              bgcolor: colors.primary[100],
-              px: 2,
-              borderRadius: 5,
-              color: colors.primary[800],
-              fontWeight: "bold",
-            }}
-          >
-            {currentDate}
-          </Typography>
-        </Stack>
+      ) : (
         <Stack>
           {data.map((card) => (
             <Card
@@ -337,7 +292,7 @@ export default function PrayerTimesCards({
             </Card>
           ))}
         </Stack>
-      </Container>
-    );
-  }
+      )}
+    </Container>
+  );
 }

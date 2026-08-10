@@ -41,7 +41,7 @@ export default function CurrentCountry({
         <Card
           sx={{
             boxShadow: " 0 0 14px 2px #0000001f",
-            p: 6,
+            p: 3,
             borderRadius: 5,
             backgroundColor: "transparent",
           }}
@@ -64,10 +64,15 @@ export default function CurrentCountry({
                   "& .MuiTypography-root": {
                     fontWeight: "bold",
                   },
+                  "@media (max-width: 564px)": {
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 1,
+                  },
                 }}
               >
                 <LocationOnIcon />
-                <Typography variant="body1">
+                <Typography variant="body1" sx={{}}>
                   {location.city || "Alexandria"}, {location.country || "Egypt"}
                 </Typography>
                 <Typography variant="body1">•</Typography>
@@ -79,6 +84,9 @@ export default function CurrentCountry({
                 sx={{
                   color: "primary.dark",
                   fontWeight: "bold",
+                  "@media (max-width: 564px)": {
+                    fontSize: "35px",
+                  },
                 }}
               >
                 Experience Spiritual Tranquility
@@ -98,11 +106,17 @@ export default function CurrentCountry({
                   boxShadow: "0 0 4px 1px #e8e8e879",
                   justifyContent: "center",
                   alignItems: "center",
+                  "@media (max-width: 564px)": {
+                    flexDirection: "column",
+                  },
                 }}
               >
                 <Stack
                   sx={{
                     alignItems: "start",
+                    "@media (max-width: 564px)": {
+                      alignItems: "center",
+                    },
                   }}
                 >
                   <Typography
@@ -122,7 +136,15 @@ export default function CurrentCountry({
                     {nextPrayerTitle?.toLocaleUpperCase()}
                   </Typography>
                 </Stack>
-                <Stack sx={{ alignItems: "end" }}>
+                <Stack
+                  sx={{
+                    alignItems: "end",
+                    "@media (max-width: 564px)": {
+                      alignItems: "center",
+                      marginLeft: "0 !important",
+                    },
+                  }}
+                >
                   <Typography
                     sx={{ color: "text.primary", fontWeight: "bold" }}
                     variant="body2"

@@ -15,7 +15,6 @@ export default function PrayerTimesProvider({
 }) {
   const [location, setLocation] = useState<Location>({} as Location);
   const [loading, setLoading] = useState(true);
-  const [fetchLoading, setFetchLoading] = useState(false);
   const [prayerTimesData, setPrayerTimesData] = useState<PryerTimes | null>(
     null,
   );
@@ -62,7 +61,6 @@ export default function PrayerTimesProvider({
     if (!location.city) return;
 
     async function fetchData() {
-      setFetchLoading(true);
       try {
         const prayerTimes = await getPrayerTimes(location);
         setPrayerTimesData(prayerTimes.data.prayer_times);
@@ -72,7 +70,6 @@ export default function PrayerTimesProvider({
         console.error(error);
       } finally {
         setLoading(false);
-        setFetchLoading(false);
       }
     }
 
@@ -84,7 +81,6 @@ export default function PrayerTimesProvider({
       value={{
         location,
         timeZone,
-        fetchLoading,
         setLocation,
         loading,
         prayerTimesData,

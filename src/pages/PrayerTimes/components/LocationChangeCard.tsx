@@ -12,9 +12,11 @@ import type { SelectChangeEvent } from "@mui/material/Select";
 import useGetPrayerTimeData from "../../../hooks/usePrayerTimeData";
 import countries from "../../../utilities/countries";
 import getCountryData from "../../../api/countryDataApi";
+import { useState } from "react";
 
 export default function LocationChangeCard() {
-  const { fetchLoading, location, setLocation } = useGetPrayerTimeData();
+  const { location, setLocation } = useGetPrayerTimeData();
+  const [fetchLoading, setFetchLoading] = useState(false);
 
   const [country, setCountry] = React.useState(location.country);
   const [city, setCity] = React.useState(location.city);
@@ -32,6 +34,7 @@ export default function LocationChangeCard() {
   };
 
   const handleDetectLocation = () => {
+    setFetchLoading(true);
     const selectedCountry = countries.find((currCountry) => {
       return currCountry.name === country;
     });
@@ -40,15 +43,22 @@ export default function LocationChangeCard() {
     });
 
     if (selectedCountry && selectedCity) {
-      getCountryData(selectedCountry?.name, selectedCity?.name).then((data) => {
-        setLocation({
-          ...location,
-          country: selectedCountry?.name,
-          city: selectedCity?.name,
-          latitude: data[0].lat,
-          longitude: data[0].lon,
+      getCountryData(selectedCountry?.name, selectedCity?.name)
+        .then((data) => {
+          setLocation({
+            ...location,
+            country: selectedCountry?.name,
+            city: selectedCity?.name,
+            latitude: data[0].lat,
+            longitude: data[0].lon,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          setFetchLoading(false);
         });
-      });
     }
   };
 

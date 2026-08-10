@@ -70,7 +70,10 @@ export default function Settings() {
 function Apperance() {
   const [mode, setMode] = useState("system");
   return (
-    <OptionCard>
+    <OptionCard
+      title={"Theme"}
+      description={"Select your preferred viewing mode"}
+    >
       <ColorLensOutlinedIcon />
       <ButtonGroup variant="outlined" aria-label="Basic button group">
         <Button
@@ -109,7 +112,7 @@ function Language() {
     setLang(event.target.value as string);
   };
   return (
-    <OptionCard>
+    <OptionCard title={"Language"} description={"App interface language"}>
       <LanguageIcon />
       <Box
         sx={{
@@ -141,7 +144,10 @@ function TimeFormat() {
   const [timeFormat, setTimeFormat] = useState("12");
 
   return (
-    <OptionCard>
+    <OptionCard
+      title={"Time Format"}
+      description={"12-hour or 24-hour display"}
+    >
       <AccessTimeIcon />
       <ButtonGroup variant="outlined" aria-label="Basic button group">
         <Button

@@ -7,8 +7,12 @@ import { Avatar } from "@mui/material";
 import { Children } from "react";
 
 export default function OptionCard({
+  title,
+  description,
   children,
 }: {
+  title: string;
+  description: string;
   children: React.ReactNode;
 }) {
   const childrenArray = Children.toArray(children);
@@ -43,11 +47,9 @@ export default function OptionCard({
               variant="subtitle1"
               sx={{ fontSize: "18px", color: "black" }}
             >
-              Theme
+              {title}
             </Typography>
-            <Typography variant="body2">
-              Select your preferred viewing mode
-            </Typography>
+            <Typography variant="body2">{description}</Typography>
           </Stack>
         </Stack>
         {childrenArray[1]}

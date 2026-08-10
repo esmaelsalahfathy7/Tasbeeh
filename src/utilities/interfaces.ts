@@ -35,8 +35,20 @@ export interface PrayerTimesContextType {
   location: Location;
   setLocation: React.Dispatch<React.SetStateAction<Location>>;
   loading: boolean;
-  fetchLoading: boolean;
   prayerTimesData: PryerTimes | null;
   currentStatus: CurrentStatus | null;
   timeZone: string;
+}
+
+export interface Surah {
+  text: string;
+  surah: {
+    number: number;
+    name: string;
+    englishName: string;
+    englishNameTranslation: string;
+    revelationType: string;
+    numberOfAyahs: number;
+  };
+  numberInSurah: 107;
 }
