@@ -51,7 +51,7 @@ export default function QuraanMessage() {
               maxWidth: "28rem",
               mt: 13,
               bgcolor: "#FAEBD7",
-              boxShadow: "0px 0px 17px 2px #e6e6e6;",
+              // boxShadow: "0px 0px 17px 2px #e6e6e6;",
               borderRadius: 2,
               position: "relative",
               cursor: "pointer",
@@ -64,7 +64,7 @@ export default function QuraanMessage() {
               sx={{
                 width: "100%",
                 height: "50%",
-                borderRadius: 1,
+                borderRadius: 2,
                 bgcolor: "#F5EFE6",
                 clipPath: "polygon(0% 0%, 100% 0%, 50% 100%)",
                 position: "absolute",
@@ -77,6 +77,7 @@ export default function QuraanMessage() {
                 height: "50%",
                 bgcolor: "#FDFAF5",
                 position: "absolute",
+                borderRadius: 2,
                 top: 0,
                 left: 0,
                 transition:
@@ -133,19 +134,22 @@ export default function QuraanMessage() {
               />
               <Typography
                 variant="h4"
-                sx={{
-                  color: "primary.dark",
+                sx={(theme) => ({
+                  color:
+                    theme.palette.mode === "dark"
+                      ? "primary.light"
+                      : "primary.dark",
                   fontWeight: "bold",
                   fontFamily: "Literata, serif",
                   "@media (max-width: 565px)": {
                     fontSize: "25px",
                   },
-                }}
+                })}
               >
                 {surah?.text || "فإن مع العسر يسرا"}
               </Typography>
 
-              <Typography variant="subtitle1" sx={{ color: "text.primary" }}>
+              <Typography variant="h5" sx={{ color: "text.secondary" }}>
                 {` ${surah?.surah.name} - ${surah?.surah.number} : ${surah?.numberInSurah}`}
               </Typography>
             </CardContent>
