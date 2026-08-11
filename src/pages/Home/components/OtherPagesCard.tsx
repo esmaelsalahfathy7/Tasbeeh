@@ -23,6 +23,9 @@ export default function OtherPagesCard({
         p: 4,
         borderRadius: 5,
         backgroundColor: "transparent",
+        border: "1px solid",
+        borderColor: "divider",
+        backgroundImage: "none",
       }}
     >
       <CardContent
@@ -69,7 +72,7 @@ export default function OtherPagesCard({
           >
             {title}
           </Typography>
-          <Typography variant="body1" sx={{ color: "text.primary" }}>
+          <Typography variant="body1" sx={{ color: "text.secondary" }}>
             {description}
           </Typography>
           {childrenArray[1]}

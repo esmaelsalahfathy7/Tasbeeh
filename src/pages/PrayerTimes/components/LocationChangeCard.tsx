@@ -68,6 +68,8 @@ export default function LocationChangeCard() {
         boxShadow: " 0 0 14px 2px #0000001f",
         backgroundColor: "transparent",
         borderRadius: 4,
+        border: "1px solid",
+        borderColor: "divider",
       }}
     >
       <CardContent
@@ -81,7 +83,7 @@ export default function LocationChangeCard() {
             variant="h5"
             component="div"
             sx={{
-              color: "black",
+              color: "text.secondary",
               fontFamily: "Literata, serif",
             }}
           >
@@ -149,6 +151,11 @@ export default function LocationChangeCard() {
               p: 1,
               display: "flex",
               gap: 1,
+              color: "primary.dark",
+              borderColor: "primary.main",
+              "&:hover": {
+                borderColor: "primary.dark",
+              },
             }}
             disabled={fetchLoading}
             onClick={handleDetectLocation}

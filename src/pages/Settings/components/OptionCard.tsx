@@ -2,7 +2,6 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/material";
-import { colors } from "../../../theme/Colors";
 import { Avatar } from "@mui/material";
 import { Children } from "react";
 
@@ -21,7 +20,9 @@ export default function OptionCard({
       sx={{
         minWidth: 275,
         bgcolor: "transparent",
-        boxShadow: "0px 0px 2px 1px #e2e2e2",
+        // boxShadow: "0px 0px 2px 1px #e2e2e2",
+        border: "1px solid",
+        borderColor: "divider",
         borderRadius: 4,
         p: 1,
       }}
@@ -31,12 +32,22 @@ export default function OptionCard({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
+          "@media (max-width: 565px)": {
+            flexDirection: "column",
+            gap: 2,
+          },
         }}
       >
-        <Stack direction={"row"} sx={{ alignItems: "center" }} spacing={1}>
+        <Stack
+          direction={"row"}
+          sx={{
+            alignItems: "center",
+          }}
+          spacing={2}
+        >
           <Avatar
             sx={{
-              bgcolor: colors.primary[50],
+              bgcolor: "background.paper",
               color: "primary.dark",
             }}
           >
@@ -45,7 +56,7 @@ export default function OptionCard({
           <Stack>
             <Typography
               variant="subtitle1"
-              sx={{ fontSize: "18px", color: "black" }}
+              sx={{ fontSize: "18px", color: "text.secondary" }}
             >
               {title}
             </Typography>

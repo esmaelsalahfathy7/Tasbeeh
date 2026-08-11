@@ -13,6 +13,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import SettingsIcon from "@mui/icons-material/Settings";
+import useSettingsData from "../hooks/useSettingsData";
 
 // Defining the navigation pages for desktop view and mobile view with icons
 const pagesData = [
@@ -24,7 +25,7 @@ const pagesData = [
 ];
 
 const pagesDataMobile = [
-  { id: 1, icon: <HomeIcon />, title: "Home", target: "" },
+  { id: 1, icon: <HomeIcon />, title: "Home", target: "/" },
   { id: 2, icon: <AccessTimeIcon />, title: "Prayers", target: "prayer-times" },
   { id: 3, icon: <MenuBookIcon />, title: "Quraan", target: "quraan-message" },
   { id: 4, icon: <AutoAwesomeIcon />, title: "Tasbeeh", target: "tasbeeh" },
@@ -34,6 +35,7 @@ const pagesDataMobile = [
 // ---------- // ------------------ // ----------
 // Main CustomHeader component that renders the navigation bar with responsive design
 export default function CustomHeader() {
+  const { language } = useSettingsData().settings;
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -45,14 +47,19 @@ export default function CustomHeader() {
     <AppBar
       position="fixed"
       sx={(theme) => ({
-        bgcolor: "#f8f8fa73",
+        direction: language === "ar" ? "rtl" : "ltr",
+        bgcolor: "background.default",
         backdropFilter: "blur(5px)",
         m: 0,
         boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+        backgroundImage: "none",
+        borderBottom: "0.2px solid ",
+        borderBottomColor: "divider",
         [theme.breakpoints.down(768)]: {
           top: "unset",
           bottom: 0,
-          borderTop: "1px solid #E0E0E0",
+          borderTop: "1px solid",
+          borderTopColor: "divider",
           boxShadow: "0px -2px 4px rgba(0, 0, 0, 0.1)",
         },
       })}
@@ -153,8 +160,8 @@ export default function CustomHeader() {
                     backgroundColor: alpha(theme.palette.primary.main, 0.1),
                   },
                   "&.active": {
-                    backgroundColor: alpha("#6CF8BB", 1),
-                    color: "#00714d",
+                    color: "primary.dark",
+                    backgroundColor: alpha(theme.palette.primary.main, 0.2),
                   },
                 })}
               >

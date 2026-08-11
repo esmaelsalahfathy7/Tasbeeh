@@ -1,27 +1,31 @@
 import { Outlet } from "react-router-dom";
 import CustomHeader from "./components/CustomHeader";
 import Typography from "@mui/material/Typography";
+import { Box } from "@mui/material";
 
 export default function Layout() {
   return (
-    <div
-      style={{
+    <Typography
+      sx={{
         display: "flex",
         flexDirection: "column",
         minHeight: "100vh",
         justifyContent: "space-between",
+        bgcolor: "background.default",
       }}
+      component={"div"}
     >
       <CustomHeader />
       <main>
         <Outlet />
       </main>
-      <footer
-        style={{
+      <Box
+        sx={{
           padding: "1rem",
           textAlign: "center",
-          backgroundColor: "#F3F4F5",
-          borderTop: "1px solid #E0E0E0",
+          borderTop: "1px solid",
+          borderTopColor: "divider",
+          color: "text.secondary",
         }}
       >
         <Typography
@@ -39,14 +43,14 @@ export default function Layout() {
           <Typography
             variant="body1"
             gutterBottom
-            sx={{ color: "primary.main", m: 0, fontWeight: "700" }}
+            sx={{ color: "primary.dark", m: 0, fontWeight: "700" }}
           >
             {" "}
             Sakinah.
           </Typography>{" "}
           All rights reserved
         </Typography>
-      </footer>
-    </div>
+      </Box>
+    </Typography>
   );
 }

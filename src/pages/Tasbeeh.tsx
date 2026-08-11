@@ -111,21 +111,25 @@ export default function Tasbeeh() {
         </Button>
         <Button
           variant="contained"
-          sx={{
+          sx={(theme) => ({
             width: "150px",
             height: "150px",
             borderRadius: "50%",
             fontSize: "1.5rem",
-            backgroundColor: "text.secondary",
+            backgroundColor:
+              theme.palette.mode === "dark" ? "text.secondary" : "primary.main",
             boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.9)",
             "&:hover": {
-              backgroundColor: "text.secondary",
+              backgroundColor:
+                theme.palette.mode === "dark"
+                  ? "primary.light"
+                  : "primary.dark",
               boxShadow: "0px 0px 15px rgba(0, 0, 0, 1)",
             },
             "&:active": {
               transform: "scale(.95)",
             },
-          }}
+          })}
           onClick={handleTap}
         >
           Tap

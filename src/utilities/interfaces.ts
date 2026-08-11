@@ -52,3 +52,14 @@ export interface Surah {
   };
   numberInSurah: 107;
 }
+
+export interface SettingsValues {
+  theme: "dark" | "light" | "system";
+  language: string;
+  timeFormat: string;
+}
+
+export interface Settings {
+  settings: SettingsValues;
+  setSettings: React.Dispatch<React.SetStateAction<SettingsValues>>;
+}

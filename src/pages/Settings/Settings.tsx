@@ -2,7 +2,6 @@ import { Container, Stack, Typography } from "@mui/material";
 import OptionCard from "./components/OptionCard";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
-import { useState } from "react";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -10,6 +9,7 @@ import Select, { type SelectChangeEvent } from "@mui/material/Select";
 import ColorLensOutlinedIcon from "@mui/icons-material/ColorLensOutlined";
 import LanguageIcon from "@mui/icons-material/Language";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import useSettingsData from "../../hooks/useSettingsData";
 
 export default function Settings() {
   return (
@@ -68,35 +68,51 @@ export default function Settings() {
 }
 
 function Apperance() {
-  const [mode, setMode] = useState("system");
+  const { settings, setSettings } = useSettingsData();
+
+  const handleThemeChanged = (theme: "dark" | "light" | "system") => {
+    setSettings({ ...settings, theme: theme });
+  };
   return (
     <OptionCard
       title={"Theme"}
       description={"Select your preferred viewing mode"}
     >
       <ColorLensOutlinedIcon />
-      <ButtonGroup variant="outlined" aria-label="Basic button group">
+      <ButtonGroup
+        variant="outlined"
+        aria-label="Basic button group"
+        sx={(theme) => ({
+          button: {
+            "&:hover": {
+              backgroundColor:
+                theme.palette.mode === "dark" ? "background.default" : "",
+              color: theme.palette.mode === "dark" ? "text.primary" : "",
+            },
+          },
+        })}
+      >
         <Button
           onClick={() => {
-            setMode("dark");
+            handleThemeChanged("dark");
           }}
-          variant={mode === "dark" ? "contained" : "outlined"}
+          variant={settings.theme === "dark" ? "contained" : "outlined"}
         >
           Dark
         </Button>
         <Button
           onClick={() => {
-            setMode("light");
+            handleThemeChanged("light");
           }}
-          variant={mode === "light" ? "contained" : "outlined"}
+          variant={settings.theme === "light" ? "contained" : "outlined"}
         >
           Light
         </Button>
         <Button
           onClick={() => {
-            setMode("system");
+            handleThemeChanged("system");
           }}
-          variant={mode === "system" ? "contained" : "outlined"}
+          variant={settings.theme === "system" ? "contained" : "outlined"}
         >
           System
         </Button>
@@ -106,10 +122,10 @@ function Apperance() {
 }
 
 function Language() {
-  const [lang, setLang] = useState("en");
+  const { settings, setSettings } = useSettingsData();
 
   const handleLanguageChange = (event: SelectChangeEvent) => {
-    setLang(event.target.value as string);
+    setSettings({ ...settings, language: event.target.value as string });
   };
   return (
     <OptionCard title={"Language"} description={"App interface language"}>
@@ -127,9 +143,12 @@ function Language() {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={lang}
+            value={settings.language}
             onChange={handleLanguageChange}
-            sx={{ color: "black", borderRadius: 3 }}
+            sx={(theme) => ({
+              color: theme.palette.mode === "light" ? "black" : "",
+              borderRadius: 3,
+            })}
           >
             <MenuItem value={"en"}>English</MenuItem>
             <MenuItem value={"ar"}>Arabic (العربية)</MenuItem>
@@ -141,28 +160,39 @@ function Language() {
 }
 
 function TimeFormat() {
-  const [timeFormat, setTimeFormat] = useState("12");
-
+  const { settings, setSettings } = useSettingsData();
   return (
     <OptionCard
       title={"Time Format"}
       description={"12-hour or 24-hour display"}
     >
       <AccessTimeIcon />
-      <ButtonGroup variant="outlined" aria-label="Basic button group">
+      <ButtonGroup
+        variant="outlined"
+        aria-label="Basic button group"
+        sx={(theme) => ({
+          button: {
+            "&:hover": {
+              backgroundColor:
+                theme.palette.mode === "dark" ? "background.default" : "",
+              color: theme.palette.mode === "dark" ? "text.primary" : "",
+            },
+          },
+        })}
+      >
         <Button
           onClick={() => {
-            setTimeFormat("12");
+            setSettings({ ...settings, timeFormat: "12" });
           }}
-          variant={timeFormat === "12" ? "contained" : "outlined"}
+          variant={settings.timeFormat === "12" ? "contained" : "outlined"}
         >
           12h
         </Button>
         <Button
           onClick={() => {
-            setTimeFormat("24");
+            setSettings({ ...settings, timeFormat: "24" });
           }}
-          variant={timeFormat === "24" ? "contained" : "outlined"}
+          variant={settings.timeFormat === "24" ? "contained" : "outlined"}
         >
           24h
         </Button>

@@ -13,7 +13,12 @@ export default function PrayerTimesProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [location, setLocation] = useState<Location>({} as Location);
+  const [location, setLocation] = useState<Location>({
+    latitude: 30.0444,
+    longitude: 31.2357,
+    country: "Egypt",
+    city: "Cairo",
+  } as Location);
   const [loading, setLoading] = useState(true);
   const [prayerTimesData, setPrayerTimesData] = useState<PryerTimes | null>(
     null,
@@ -38,27 +43,28 @@ export default function PrayerTimesProvider({
           setLocation(currentLocation);
         } else {
           setLocation({
-            latitude: 31.2001,
-            longitude: 29.9187,
+            latitude: 30.0444,
+            longitude: 31.2357,
             country: "Egypt",
-            city: "Alexandria",
+            city: "Cairo",
           });
         }
       },
       (error) => {
         console.error(error);
         setLocation({
-          latitude: 31.2001,
-          longitude: 29.9187,
+          latitude: 30.0444,
+          longitude: 31.2357,
           country: "Egypt",
-          city: "Alexandria",
+          city: "Cairo",
         });
+        console.log("dsadsa");
       },
     );
   }, []);
 
   useEffect(() => {
-    if (!location.city) return;
+    // if (!location.city) return;
 
     async function fetchData() {
       try {

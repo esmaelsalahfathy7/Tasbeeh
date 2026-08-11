@@ -23,9 +23,7 @@ export default function QuraanMessage() {
   }, []);
   return (
     <>
-      <div
-        style={{ backgroundColor: "#F8F9FA", minHeight: "calc(100vh - 70px)" }}
-      >
+      <div style={{ minHeight: "calc(100vh - 70px)" }}>
         <Container
           maxWidth={"sm"}
           sx={{

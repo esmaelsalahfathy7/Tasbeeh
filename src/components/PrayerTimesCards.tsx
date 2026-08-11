@@ -26,6 +26,7 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import usePrayerTimeData from "../hooks/usePrayerTimeData";
 
 import { pulse, ping } from "../utilities/animation";
+import useSettingsData from "../hooks/useSettingsData";
 
 dayjs.extend(customParseFormat);
 
@@ -74,6 +75,7 @@ export default function PrayerTimesCards({
   isColumns?: boolean;
 }) {
   const { prayerTimesData, currentStatus } = usePrayerTimeData();
+  const { settings } = useSettingsData();
   const currentDate = dayjs().format("dddd, D MMMM ");
 
   const nextPrayer =
@@ -87,7 +89,7 @@ export default function PrayerTimesCards({
       return { ...card, time: prayerTimesData[pray] };
     });
   }
-  const dotColor = colors.primary[500];
+  const dotColor = "#10B981";
 
   return (
     <Container>
@@ -113,10 +115,10 @@ export default function PrayerTimesCards({
         <Typography
           variant="caption"
           sx={{
-            bgcolor: colors.primary[100],
+            bgcolor: colors.primary[900],
             px: 2,
             borderRadius: 5,
-            color: colors.primary[800],
+            color: colors.primary[200],
             fontWeight: "bold",
           }}
         >
@@ -133,10 +135,12 @@ export default function PrayerTimesCards({
                 }
                 sx={{
                   bgcolor: "background.default",
-                  boxShadow: "0px 0px 8px 2px #e2e2e2",
                   borderRadius: 4,
                   position: "relative",
-
+                  transition: "0.3s",
+                  backgroundImage: "none",
+                  border: "1px solid",
+                  borderColor: "divider",
                   "&.active": {
                     backgroundColor: "primary.main",
                     animation: `${pulse} 3s ease-in-out infinite`,
@@ -147,7 +151,7 @@ export default function PrayerTimesCards({
                       color: colors.primary[200],
                     },
                     span: {
-                      color: "primary.light",
+                      color: "text.secondary",
                     },
                     h6: {
                       color: "white",
@@ -195,10 +199,17 @@ export default function PrayerTimesCards({
                     }}
                   />
                 </Box>
-                <CardContent sx={{ p: 3 }}>
+                <CardContent
+                  sx={{
+                    p: 3,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
                   <Typography
                     sx={{
-                      color: "#707974",
+                      color: "text.secondary",
                       "& svg": {
                         fontSize: "24px",
                         transition: "0.3s",
@@ -209,12 +220,18 @@ export default function PrayerTimesCards({
                   </Typography>
                   <Typography
                     variant="caption"
-                    sx={{ color: "text.primary", fontWeight: "bold" }}
+                    sx={{
+                      color: "text.primary",
+                      fontWeight: "bold",
+                      transition: "0.3s",
+                    }}
                   >
                     {card.pray.toUpperCase()}
                   </Typography>
-                  <Typography variant="h6" sx={{ color: "text.secondary" }}>
-                    {dayjs(card.time, "HH:mm").format("hh:mm A")}
+                  <Typography variant="h6" sx={{ color: "primary.dark" }}>
+                    {dayjs(card.time, "HH:mm").format(
+                      settings.timeFormat === "12" ? "hh:mm A" : "HH:mm",
+                    )}
                   </Typography>
                 </CardContent>
               </Card>
@@ -222,7 +239,7 @@ export default function PrayerTimesCards({
           ))}
         </Grid>
       ) : (
-        <Stack>
+        <Stack sx={{ mb: 20 }}>
           {data.map((card) => (
             <Card
               key={card.id}
@@ -231,9 +248,10 @@ export default function PrayerTimesCards({
               }
               sx={{
                 bgcolor: "background.default",
-                boxShadow: "0px 0px 8px 2px #e2e2e2",
                 borderRadius: 4,
                 position: "relative",
+                border: "1px solid",
+                borderColor: "divider",
 
                 "&.active": {
                   backgroundColor: "primary.main",
@@ -251,12 +269,11 @@ export default function PrayerTimesCards({
                   },
                 },
 
-                svg: {
-                  color: "primary.dark",
-                },
-
                 "&:hover:not(.active)": {
                   bgcolor: "background.paper",
+                  h5: {
+                    color: "primary.dark",
+                  },
                 },
               }}
             >
@@ -285,8 +302,10 @@ export default function PrayerTimesCards({
                   {card.icon}
                   {card.pray.toUpperCase()}
                 </Typography>
-                <Typography variant="h6" sx={{ color: "text.secondary" }}>
-                  {dayjs(card.time, "HH:mm").format("hh:mm A")}
+                <Typography variant="h6" sx={{ color: "primary.dark" }}>
+                  {dayjs(card.time, "HH:mm").format(
+                    settings.timeFormat === "12" ? "hh:mm A" : "HH:mm",
+                  )}
                 </Typography>
               </CardContent>
             </Card>

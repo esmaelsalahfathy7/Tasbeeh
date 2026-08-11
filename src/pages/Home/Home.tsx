@@ -46,7 +46,17 @@ export default function Home() {
                 >
                   <AutoStoriesIcon />
                   <Link to={"quraan-message"}>
-                    <Button variant="contained">
+                    <Button
+                      variant="contained"
+                      sx={(theme) => ({
+                        "&:hover": {
+                          bgcolor:
+                            theme.palette.mode === "dark"
+                              ? "background.paper"
+                              : "",
+                        },
+                      })}
+                    >
                       Open Quraan Message
                       <EastIcon sx={{ fontSize: 18, marginInlineStart: 1 }} />
                     </Button>
@@ -59,7 +69,17 @@ export default function Home() {
                   <AccessTimeIcon />
 
                   <Link to={"tasbeeh"}>
-                    <Button variant="outlined">Start Tasbeeh</Button>
+                    <Button
+                      variant="outlined"
+                      sx={{
+                        color: "text.primary",
+                        "&:hover": {
+                          borderColor: "primary.dark",
+                        },
+                      }}
+                    >
+                      Start Tasbeeh
+                    </Button>
                   </Link>
                 </OtherPagesCard>
               </Stack>
