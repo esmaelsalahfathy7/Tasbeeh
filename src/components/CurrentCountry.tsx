@@ -6,16 +6,16 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Divider from "@mui/material/Divider";
 import usePrayerTimeData from "../hooks/usePrayerTimeData";
 import dayjs from "dayjs";
-import useCountDown from "../hooks/useCountDown";
+import { useTranslation } from "react-i18next";
+import CountDown from "./CountDown";
 
 export default function CurrentCountry({
   summarized = false,
 }: {
   summarized?: boolean;
 }) {
+  const { t, i18n } = useTranslation();
   const { location, currentStatus } = usePrayerTimeData();
-
-  const remainingToNext = useCountDown();
 
   const currentTime = dayjs().format("hh:mm A");
   const nextPrayerTitle =
@@ -23,17 +23,10 @@ export default function CurrentCountry({
       ? currentStatus?.next_prayer
       : "Fajer";
 
-  const hours = Math.floor(remainingToNext / 3600) || 0;
-  const minutes = Math.floor(remainingToNext / 60) % 60 || 0;
-  const seconds = remainingToNext % 60 || 0;
-
   return (
     <>
       <Container
         sx={{
-          display: !summarized ? "flex" : "block",
-          justifyContent: "center",
-          alignItems: " center",
           textAlign: "center",
           my: 20,
         }}
@@ -67,6 +60,7 @@ export default function CurrentCountry({
                     textTransform: "uppercase",
                     letterSpacing: 3,
                     gap: 2,
+                    direction: i18n.language === "ar" ? "rtl" : "ltr",
                     "& .MuiTypography-root": {
                       fontWeight: "bold",
                     },
@@ -79,8 +73,10 @@ export default function CurrentCountry({
                 >
                   <LocationOnIcon />
                   <Typography variant="caption" sx={{}}>
-                    {location.city || "Alexandria"},{" "}
-                    {location.country || "Egypt"}
+                    {i18n.language === "ar" ? location.cityAr : location.city},{" "}
+                    {i18n.language === "ar"
+                      ? location.countryAr
+                      : location.country}
                   </Typography>
                   <Typography variant="caption">•</Typography>
                   <Typography variant="caption">{currentTime}</Typography>
@@ -96,10 +92,10 @@ export default function CurrentCountry({
                     },
                   }}
                 >
-                  Experience Spiritual Tranquility
+                  {t("introMsg")}
                 </Typography>
                 <Typography variant="h6" sx={{ color: "text.secondary" }}>
-                  Find your peace in the rhythm of daily devotions.
+                  {t("introDescription")}
                 </Typography>
                 <Stack
                   direction={"row"}
@@ -114,6 +110,7 @@ export default function CurrentCountry({
                     alignItems: "center",
                     border: "1px solid",
                     borderColor: "divider",
+                    direction: i18n.language === "ar" ? "rtl" : "ltr",
                     "@media (max-width: 564px)": {
                       flexDirection: "column",
                     },
@@ -128,10 +125,14 @@ export default function CurrentCountry({
                     }}
                   >
                     <Typography
-                      sx={{ color: "text.secondary", fontWeight: "bold" }}
+                      sx={{
+                        color: "text.secondary",
+                        fontWeight: "bold",
+                        marginInlineEnd: 2,
+                      }}
                       variant="body2"
                     >
-                      Next Prayer
+                      {t("nextPray")}
                     </Typography>
                     <Typography
                       sx={{
@@ -142,7 +143,7 @@ export default function CurrentCountry({
                       }}
                       variant="h5"
                     >
-                      {nextPrayerTitle}
+                      {t(`${nextPrayerTitle?.toLowerCase()}`)}
                     </Typography>
                   </Stack>
                   <Stack
@@ -158,18 +159,9 @@ export default function CurrentCountry({
                       sx={{ color: "text.primary", fontWeight: "bold" }}
                       variant="body2"
                     >
-                      Time Remaining
+                      {t("nextPrayRemain")}
                     </Typography>
-                    <Typography
-                      sx={{
-                        color: "text.primary",
-                        fontWeight: "bold",
-                        fontFamily: "Literata, serif",
-                      }}
-                      variant="h5"
-                    >
-                      {` ${String(hours).padStart(2, "0")} : ${String(minutes).padStart(2, "0")} :${String(seconds).padStart(2, "0")} `}
-                    </Typography>
+                    <CountDown />
                   </Stack>
                 </Stack>
               </Stack>
@@ -194,7 +186,12 @@ export default function CurrentCountry({
                   }}
                 >
                   <LocationOnIcon />
-                  {location.city || "Alexandria"}, {location.country || "Egypt"}
+                  {i18n.language === "ar"
+                    ? location.cityAr
+                    : location.city},{" "}
+                  {i18n.language === "ar"
+                    ? location.countryAr
+                    : location.country}
                 </Typography>
 
                 <Typography
@@ -206,7 +203,7 @@ export default function CurrentCountry({
                   }}
                   variant="h3"
                 >
-                  {nextPrayerTitle}
+                  {t(`${nextPrayerTitle?.toLowerCase()}`)}
                 </Typography>
                 <Typography
                   sx={{
@@ -216,13 +213,13 @@ export default function CurrentCountry({
                   }}
                   variant="h5"
                 >
-                  {` ${String(hours).padStart(2, "0")} : ${String(minutes).padStart(2, "0")} :${String(seconds).padStart(2, "0")} `}
+                  <CountDown />
                 </Typography>
                 <Typography
                   sx={{ color: "text.secondary", fontWeight: "bold" }}
                   variant="body2"
                 >
-                  Time until next prayer
+                  {t("nextPrayRemain")}
                 </Typography>
               </Stack>
             )}

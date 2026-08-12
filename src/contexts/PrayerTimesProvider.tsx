@@ -7,6 +7,7 @@ import type {
   PryerTimes,
 } from "../utilities/interfaces";
 import locations from "../utilities/locations";
+import LoadingComponent from "../components/LoadingComponent";
 
 export default function PrayerTimesProvider({
   children,
@@ -17,7 +18,9 @@ export default function PrayerTimesProvider({
     latitude: 30.0444,
     longitude: 31.2357,
     country: "Egypt",
+    countryAr: "مصر",
     city: "Cairo",
+    cityAr: "القاهرة",
   } as Location);
   const [loading, setLoading] = useState(true);
   const [prayerTimesData, setPrayerTimesData] = useState<PryerTimes | null>(
@@ -46,7 +49,9 @@ export default function PrayerTimesProvider({
             latitude: 30.0444,
             longitude: 31.2357,
             country: "Egypt",
+            countryAr: "مصر",
             city: "Cairo",
+            cityAr: "القاهرة",
           });
         }
       },
@@ -56,7 +61,9 @@ export default function PrayerTimesProvider({
           latitude: 30.0444,
           longitude: 31.2357,
           country: "Egypt",
+          countryAr: "مصر",
           city: "Cairo",
+          cityAr: "القاهرة",
         });
         console.log("dsadsa");
       },
@@ -82,6 +89,9 @@ export default function PrayerTimesProvider({
     fetchData();
   }, [location]);
 
+  if (loading) {
+    return <LoadingComponent />;
+  }
   return (
     <PrayerTimesContext.Provider
       value={{

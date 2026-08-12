@@ -1,0 +1,50 @@
+{
+  "sakinah": "سكينة",
+  "home": "الرئيسية",
+  "prayers": "الصلوات",
+  "quraan": "القرآن",
+  "tasbeeh": "التسبيح",
+  "settings": "الإعدادات",
+
+  "introMsg": "سكينة القلب تبدأ مع الصلاة",
+  "introDescription": "في كل صلاة، لحظة من السكينة",
+  "nextPray": "الصلاة التالية",
+  "nextPrayRemain": "الوقت المتبقى",
+
+  "quraanMessageCardTitle": "الارشاد اليومي",
+  "quraanMessageDescription": "آيةٌ من القرآن لتبدأ بها يومك بطمأنينة.",
+  "openQuraanMsg": "الذهاب لرسالة اليوم",
+  "tasbeehCardTitle": "ذكرٌ يطمئن القلب",
+  "tasbeehDescription": "حافظ على أذكارك اليومية واجعل الذكر جزءًا من يومك",
+  "openTasbeeh": "ابدأ بالذكر",
+
+  "timePrayer": "مواقيت الصلاة",
+  "fajer": "الفجر",
+  "sunrise": "شروق الشمس",
+  "dhuhr": "الظهر",
+  "asr": "العصر",
+  "maghrib": "المغرب",
+  "isha": "العشاء",
+
+  "location": "الموقع",
+  "country": "الدولة",
+  "city": "المدينة",
+  "detectLocation": "تحديد الموقع",
+  "loading": "... تحميل",
+
+  "settingsDescription": "تحكم في تفضيلات رحلتك الروحانية",
+  "appearance": "المظهر",
+  "appearanceTitle": "السمة",
+  "appearanceDescription": "اختر وضع العرض المفضل لديك",
+  "system": "النظام",
+  "dark": "داكن",
+  "light": "فاتح",
+  "preference": "التفضيلات",
+  "languageTitle": "اللغة",
+  "languageDescription": "اختر لغة واجهة التطبيق المفضلة لديك",
+  "timeFormat": "تنسيق الوقت",
+  "timeFormatDescription": "اختر عرض الوقت بنظام 12 أو 24 ساعة",
+
+  "save": "حفظ الاعدادت",
+  "saveLoad": "... جاري الحفظ"
+}

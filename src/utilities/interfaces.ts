@@ -1,7 +1,7 @@
 export interface PryerTimes {
   asr: string;
   dhuhr: string;
-  fajr: string;
+  fajer: string;
   imsak: string;
   isha: string;
   maghrib: string;
@@ -9,7 +9,7 @@ export interface PryerTimes {
 }
 
 export type PrayerKey =
-  | "fajr"
+  | "fajer"
   | "sunrise"
   | "dhuhr"
   | "asr"
@@ -28,7 +28,9 @@ export type Location = {
   latitude: number;
   longitude: number;
   country: string;
+  countryAr: string;
   city: string;
+  cityAr: string;
 };
 
 export interface PrayerTimesContextType {

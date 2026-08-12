@@ -10,73 +10,133 @@ import ColorLensOutlinedIcon from "@mui/icons-material/ColorLensOutlined";
 import LanguageIcon from "@mui/icons-material/Language";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import useSettingsData from "../../hooks/useSettingsData";
+import { useTranslation } from "react-i18next";
+import { type TFunction } from "i18next";
+import React, { useState } from "react";
+import type { Settings, SettingsValues } from "../../utilities/interfaces";
 
 export default function Settings() {
-  return (
-    <Container maxWidth={"md"} sx={{ mt: 15 }}>
-      <Stack spacing={1} sx={{ mb: 5 }}>
-        <Typography
-          variant="h5"
-          sx={{ fontFamily: "Literata, serif", color: "primary.dark" }}
-        >
-          Settings
-        </Typography>
-        <Typography variant="subtitle1" sx={{ color: "text.primary" }}>
-          Manage your spiritual journey preferences
-        </Typography>
-      </Stack>
-      <Stack spacing={8}>
-        {/* Apperance */}
-        <div>
-          <Typography
-            variant="caption"
-            sx={{
-              color: "primary.main",
-              paddingInlineStart: 2,
-              fontWeight: "bold",
-              textTransform: "uppercase",
-              mb: 1,
-              display: "block",
-            }}
-          >
-            Appearance
-          </Typography>
-          <Apperance />
-        </div>
+  const [loadingSave, setLoadingSave] = useState<boolean>(false);
+  const { t, i18n } = useTranslation();
+  const { settings, setSettings } = useSettingsData();
+  const [currentSettings, setCurrentSettings] =
+    useState<SettingsValues>(settings);
 
-        {/* Preferences */}
-        <div>
+  const handleSaveSettings = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    setLoadingSave(true);
+    const timer = setTimeout(() => {
+      setSettings(currentSettings);
+      setLoadingSave(false);
+      clearTimeout(timer);
+    }, 2000);
+  };
+  return (
+    <>
+      <Container maxWidth={"md"} sx={{ mt: 15 }}>
+        <Stack
+          spacing={1}
+          sx={{ mb: 5, direction: i18n.language === "ar" ? "rtl" : "ltr" }}
+        >
           <Typography
-            variant="caption"
-            sx={{
-              color: "primary.main",
-              paddingInlineStart: 2,
-              fontWeight: "bold",
-              textTransform: "uppercase",
-              mb: 1,
-              display: "block",
-            }}
+            variant="h5"
+            sx={{ fontFamily: "Literata, serif", color: "primary.dark" }}
           >
-            Preferences
+            {t("settings")}
           </Typography>
-          <Language />
-          <TimeFormat />
+          <Typography variant="subtitle1" sx={{ color: "text.primary" }}>
+            {t("settingsDescription")}
+          </Typography>
+        </Stack>
+        <Stack spacing={8}>
+          {/* Apperance */}
+          <div style={{ direction: i18n.language === "ar" ? "rtl" : "ltr" }}>
+            <Typography
+              variant="caption"
+              sx={{
+                color: "primary.main",
+                paddingInlineStart: 2,
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                mb: 1,
+                display: "block",
+              }}
+            >
+              {t("appearance")}
+            </Typography>
+            <Apperance
+              t={t}
+              settings={currentSettings}
+              setSettings={setCurrentSettings}
+            />
+          </div>
+
+          {/* Preferences */}
+          <div style={{ direction: i18n.language === "ar" ? "rtl" : "ltr" }}>
+            <Typography
+              variant="caption"
+              sx={{
+                color: "primary.main",
+                paddingInlineStart: 2,
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                mb: 1,
+                display: "block",
+              }}
+            >
+              {t("preference")}
+            </Typography>
+            <Language
+              t={t}
+              settings={currentSettings}
+              setSettings={setCurrentSettings}
+            />
+            <TimeFormat
+              t={t}
+              settings={currentSettings}
+              setSettings={setCurrentSettings}
+            />
+          </div>
+        </Stack>
+        <div style={{ textAlign: i18n.language === "en" ? "end" : "start" }}>
+          <Button
+            variant="outlined"
+            sx={{
+              mt: 5,
+              color: "primary.dark",
+              borderColor: "primary.dark",
+              "&:hover": {
+                bgcolor: "background.paper",
+              },
+            }}
+            disabled={loadingSave}
+            onClick={handleSaveSettings}
+          >
+            {loadingSave ? t("saveLoad") : t("save")}
+          </Button>
         </div>
-      </Stack>
-    </Container>
+      </Container>
+    </>
   );
 }
 
-function Apperance() {
-  const { settings, setSettings } = useSettingsData();
+function Apperance({
+  t,
+  settings,
+  setSettings,
+}: {
+  t: TFunction<"translation", undefined>;
 
+  settings: SettingsValues;
+  setSettings: React.Dispatch<React.SetStateAction<SettingsValues>>;
+}) {
   const handleThemeChanged = (theme: "dark" | "light" | "system") => {
     setSettings({ ...settings, theme: theme });
   };
   return (
     <OptionCard
-      title={"Theme"}
-      description={"Select your preferred viewing mode"}
+      title={t("appearanceTitle")}
+      description={t("appearanceDescription")}
     >
       <ColorLensOutlinedIcon />
       <ButtonGroup
@@ -98,7 +158,7 @@ function Apperance() {
           }}
           variant={settings.theme === "dark" ? "contained" : "outlined"}
         >
-          Dark
+          {t("dark")}
         </Button>
         <Button
           onClick={() => {
@@ -106,7 +166,7 @@ function Apperance() {
           }}
           variant={settings.theme === "light" ? "contained" : "outlined"}
         >
-          Light
+          {t("light")}
         </Button>
         <Button
           onClick={() => {
@@ -114,21 +174,31 @@ function Apperance() {
           }}
           variant={settings.theme === "system" ? "contained" : "outlined"}
         >
-          System
+          {t("system")}
         </Button>
       </ButtonGroup>
     </OptionCard>
   );
 }
 
-function Language() {
-  const { settings, setSettings } = useSettingsData();
+function Language({
+  t,
+  settings,
+  setSettings,
+}: {
+  t: TFunction<"translation", undefined>;
 
+  settings: SettingsValues;
+  setSettings: React.Dispatch<React.SetStateAction<SettingsValues>>;
+}) {
   const handleLanguageChange = (event: SelectChangeEvent) => {
     setSettings({ ...settings, language: event.target.value as string });
   };
   return (
-    <OptionCard title={"Language"} description={"App interface language"}>
+    <OptionCard
+      title={t("languageTitle")}
+      description={t("languageDescription")}
+    >
       <LanguageIcon />
       <Box
         sx={{
@@ -159,12 +229,20 @@ function Language() {
   );
 }
 
-function TimeFormat() {
-  const { settings, setSettings } = useSettingsData();
+function TimeFormat({
+  t,
+  settings,
+  setSettings,
+}: {
+  t: TFunction<"translation", undefined>;
+
+  settings: SettingsValues;
+  setSettings: React.Dispatch<React.SetStateAction<SettingsValues>>;
+}) {
   return (
     <OptionCard
-      title={"Time Format"}
-      description={"12-hour or 24-hour display"}
+      title={t("timeFormat")}
+      description={t("timeFormatDescription")}
     >
       <AccessTimeIcon />
       <ButtonGroup

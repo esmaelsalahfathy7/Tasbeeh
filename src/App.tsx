@@ -11,6 +11,7 @@ import useSettingsData from "./hooks/useSettingsData";
 import getTheme from "./theme/CusomTheme";
 import { useMemo } from "react";
 import { CssBaseline } from "@mui/material";
+import PrayerTimeLayout from "./components/PrayerTimeLayout";
 
 function App() {
   const { theme } = useSettingsData().settings;
@@ -22,8 +23,10 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index path="" element={<Home />} />
-            <Route path="prayer-times" element={<PrayerTimes />} />
+            <Route element={<PrayerTimeLayout />}>
+              <Route index path="/" element={<Home />} />
+              <Route path="prayer-times" element={<PrayerTimes />} />
+            </Route>
             <Route path="quraan-message" element={<QuraanMessage />} />
             <Route path="tasbeeh" element={<Tasbeeh />} />
             <Route path="settings" element={<Settings />} />

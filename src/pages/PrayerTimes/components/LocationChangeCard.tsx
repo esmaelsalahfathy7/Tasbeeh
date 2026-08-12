@@ -13,8 +13,11 @@ import useGetPrayerTimeData from "../../../hooks/usePrayerTimeData";
 import countries from "../../../utilities/countries";
 import getCountryData from "../../../api/countryDataApi";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function LocationChangeCard() {
+  const { t, i18n } = useTranslation();
+
   const { location, setLocation } = useGetPrayerTimeData();
   const [fetchLoading, setFetchLoading] = useState(false);
 
@@ -51,6 +54,8 @@ export default function LocationChangeCard() {
             city: selectedCity?.name,
             latitude: data[0].lat,
             longitude: data[0].lon,
+            countryAr: selectedCountry.nameAr,
+            cityAr: selectedCity.nameAr,
           });
         })
         .catch((error) => {
@@ -70,6 +75,7 @@ export default function LocationChangeCard() {
         borderRadius: 4,
         border: "1px solid",
         borderColor: "divider",
+        direction: i18n.language === "ar" ? "rtl" : "ltr",
       }}
     >
       <CardContent
@@ -87,7 +93,7 @@ export default function LocationChangeCard() {
               fontFamily: "Literata, serif",
             }}
           >
-            Location
+            {t("location")}
           </Typography>
           <>
             <FormControl
@@ -95,7 +101,7 @@ export default function LocationChangeCard() {
               sx={{ width: "100%", cursor: "grabbing" }}
             >
               <InputLabel id="demo-simple-select-outlined-label">
-                Country
+                {t("country")}
               </InputLabel>
               <Select
                 labelId="demo-simple-select-outlined-label"
@@ -108,7 +114,7 @@ export default function LocationChangeCard() {
                 {countries.map((country) => {
                   return (
                     <MenuItem key={country.id} value={country.name}>
-                      {country.name}
+                      {i18n.language === "ar" ? country.nameAr : country.name}
                     </MenuItem>
                   );
                 })}
@@ -121,7 +127,7 @@ export default function LocationChangeCard() {
               sx={{ width: "100%", cursor: "grabbing" }}
             >
               <InputLabel id="demo-simple-select-outlined-label">
-                City
+                {t("city")}
               </InputLabel>
               <Select
                 labelId="demo-simple-select-outlined-label"
@@ -134,7 +140,7 @@ export default function LocationChangeCard() {
                 {cities?.map((city) => {
                   return (
                     <MenuItem key={city.id} value={city.name}>
-                      {city.name}
+                      {i18n.language === "ar" ? city.nameAr : city.name}
                     </MenuItem>
                   );
                 })}
@@ -161,7 +167,7 @@ export default function LocationChangeCard() {
             onClick={handleDetectLocation}
           >
             <CrisisAlertIcon />
-            {fetchLoading ? "Loading..." : "Detect Location"}
+            {fetchLoading ? t("loading") : t("detectLocation")}
           </Button>
         </Stack>
       </CardContent>

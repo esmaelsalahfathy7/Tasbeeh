@@ -27,6 +27,7 @@ import usePrayerTimeData from "../hooks/usePrayerTimeData";
 
 import { pulse, ping } from "../utilities/animation";
 import useSettingsData from "../hooks/useSettingsData";
+import { useTranslation } from "react-i18next";
 
 dayjs.extend(customParseFormat);
 
@@ -34,7 +35,7 @@ const cards = [
   {
     id: 0,
     icon: <WbTwilightIcon />,
-    pray: "Fajr",
+    pray: "Fajer",
     time: "00:00",
   },
   {
@@ -74,12 +75,16 @@ export default function PrayerTimesCards({
 }: {
   isColumns?: boolean;
 }) {
+  const { t, i18n } = useTranslation();
+
   const { prayerTimesData, currentStatus } = usePrayerTimeData();
   const { settings } = useSettingsData();
   const currentDate = dayjs().format("dddd, D MMMM ");
 
   const nextPrayer =
-    currentStatus?.next_prayer !== "none" ? currentStatus?.next_prayer : "fajr";
+    currentStatus?.next_prayer !== "none"
+      ? currentStatus?.next_prayer
+      : "fajer";
   type PrayerKey = keyof typeof prayerTimesData;
   let data: { id: number; icon: ReactNode; pray: string; time: string }[] =
     cards;
@@ -97,6 +102,8 @@ export default function PrayerTimesCards({
         direction="row"
         spacing={2}
         sx={{
+          direction: i18n.language === "ar" ? "rtl" : "ltr",
+
           justifyContent: "space-between",
           alignItems: "center",
           mb: 3,
@@ -110,7 +117,7 @@ export default function PrayerTimesCards({
           variant="h5"
           sx={{ fontFamily: "Literata, serif", color: "primary.dark" }}
         >
-          Prayer Times
+          {t("timePrayer")}
         </Typography>
         <Typography
           variant="caption"
@@ -126,7 +133,13 @@ export default function PrayerTimesCards({
         </Typography>
       </Stack>
       {!isColumns ? (
-        <Grid container spacing={2}>
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            direction: i18n.language === "ar" ? "rtl" : "ltr",
+          }}
+        >
           {data.map((card) => (
             <Grid key={card.id} size={{ xs: 6, md: 4 }}>
               <Card
@@ -226,7 +239,7 @@ export default function PrayerTimesCards({
                       transition: "0.3s",
                     }}
                   >
-                    {card.pray.toUpperCase()}
+                    {t(`${card.pray.toLowerCase()}`)}
                   </Typography>
                   <Typography variant="h6" sx={{ color: "primary.dark" }}>
                     {dayjs(card.time, "HH:mm").format(
@@ -239,7 +252,9 @@ export default function PrayerTimesCards({
           ))}
         </Grid>
       ) : (
-        <Stack sx={{ mb: 20 }}>
+        <Stack
+          sx={{ mb: 20, direction: i18n.language === "ar" ? "rtl" : "ltr" }}
+        >
           {data.map((card) => (
             <Card
               key={card.id}
@@ -300,7 +315,7 @@ export default function PrayerTimesCards({
                   }}
                 >
                   {card.icon}
-                  {card.pray.toUpperCase()}
+                  {t(`${card.pray.toLowerCase()}`)}
                 </Typography>
                 <Typography variant="h6" sx={{ color: "primary.dark" }}>
                   {dayjs(card.time, "HH:mm").format(

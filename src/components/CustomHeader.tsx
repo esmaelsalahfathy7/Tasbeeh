@@ -14,22 +14,23 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import SettingsIcon from "@mui/icons-material/Settings";
 import useSettingsData from "../hooks/useSettingsData";
+import { useTranslation } from "react-i18next";
 
 // Defining the navigation pages for desktop view and mobile view with icons
 const pagesData = [
-  { id: 1, title: "Home", target: "/" },
-  { id: 2, title: "Prayers", target: "/prayer-times" },
-  { id: 3, title: "Quraan", target: "/quraan-message" },
-  { id: 4, title: "Tasbeeh", target: "/tasbeeh" },
-  { id: 5, title: "Settings", target: "/settings" },
+  { id: 1, title: "home", target: "/" },
+  { id: 2, title: "prayers", target: "/prayer-times" },
+  { id: 3, title: "quraan", target: "/quraan-message" },
+  { id: 4, title: "tasbeeh", target: "/tasbeeh" },
+  { id: 5, title: "settings", target: "/settings" },
 ];
 
 const pagesDataMobile = [
-  { id: 1, icon: <HomeIcon />, title: "Home", target: "/" },
-  { id: 2, icon: <AccessTimeIcon />, title: "Prayers", target: "prayer-times" },
-  { id: 3, icon: <MenuBookIcon />, title: "Quraan", target: "quraan-message" },
-  { id: 4, icon: <AutoAwesomeIcon />, title: "Tasbeeh", target: "tasbeeh" },
-  { id: 5, icon: <SettingsIcon />, title: "Settings", target: "settings" },
+  { id: 1, icon: <HomeIcon />, title: "home", target: "/" },
+  { id: 2, icon: <AccessTimeIcon />, title: "prayers", target: "prayer-times" },
+  { id: 3, icon: <MenuBookIcon />, title: "quraan", target: "quraan-message" },
+  { id: 4, icon: <AutoAwesomeIcon />, title: "tasbeeh", target: "tasbeeh" },
+  { id: 5, icon: <SettingsIcon />, title: "settings", target: "settings" },
 ];
 
 // ---------- // ------------------ // ----------
@@ -37,6 +38,7 @@ const pagesDataMobile = [
 export default function CustomHeader() {
   const { language } = useSettingsData().settings;
   const { pathname } = useLocation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handlePageClick = (page: string) => {
@@ -121,7 +123,7 @@ export default function CustomHeader() {
                   },
                 })}
               >
-                {page.title}
+                {t(`${page.title}`)}
               </Button>
             ))}
           </Box>

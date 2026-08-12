@@ -1,0 +1,50 @@
+{
+  "sakinah": "Sakinah",
+  "home": "Home",
+  "prayers": "Prayers",
+  "quraan": "Quraan",
+  "tasbeeh": "Tasbeeh",
+  "settings": "Settings",
+
+  "introMsg": "Experience Spiritual Tranquility",
+  "introDescription": "Find your peace in the rhythm of daily devotions.",
+  "nextPray": "Next Prayer",
+  "nextPrayRemain": "Time Remaining",
+
+  "quraanMessageCardTitle": "Daily Guidance",
+  "quraanMessageDescription": " Start your day with a meaningful verse from the Quran.",
+  "openQuraanMsg": "OPEN QURAAN MESSAGE",
+  "tasbeehCardTitle": "Mindful Remembrance",
+  "tasbeehDescription": "Keep track of your daily Dhikr easily.",
+  "openTasbeeh": "START TASBEEH",
+
+  "timePrayer": "Prayer Times",
+  "fajer": "FAJR",
+  "sunrise": "SUNRISE",
+  "dhuhr": "DHUHR",
+  "asr": "ASR",
+  "maghrib": "MAGHRIB",
+  "isha": "ISHA",
+
+  "location": "Location",
+  "country": "Country",
+  "city": "City",
+  "detectLocation": "Detect Location",
+  "loading": "Loading...",
+
+  "settingsDescription": "Manage your spiritual journey preferences",
+  "appearance": "Appearance",
+  "appearanceTitle": "Theme",
+  "appearanceDescription": "Select your preferred viewing mode",
+  "system": "SYSTEM",
+  "dark": "DARK",
+  "light": "LIGHT",
+  "prefrence": "Preferences",
+  "languageTitle": "Language",
+  "languageDescription": "App interface language",
+  "timeFormat": "Time Format",
+  "timeFormatDescription": "12-hour or 24-hour display",
+
+  "save": "Save",
+  "saveLoad": "Saving..."
+}
