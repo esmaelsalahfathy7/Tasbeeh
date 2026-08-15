@@ -23,7 +23,9 @@ export default function CustomTypeSelection({
         sx={{ m: 1, minWidth: 200, outlineColor: "primary.main" }}
         size="small"
       >
-        <InputLabel id="demo-simple-select-autowidth-label">Type</InputLabel>
+        <InputLabel id="demo-simple-select-autowidth-label">
+          {t("type")}
+        </InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"

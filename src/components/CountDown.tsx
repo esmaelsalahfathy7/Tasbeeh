@@ -17,6 +17,7 @@ export default function CountDown() {
         fontWeight: "bold",
         fontFamily: "Literata, serif",
         fontSize: 25,
+        direction: i18n.language === "ar" ? "rtl" : "ltr",
       }}
       variant="body1"
     >

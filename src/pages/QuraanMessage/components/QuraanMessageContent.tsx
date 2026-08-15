@@ -12,6 +12,7 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import { useState } from "react";
 import useQuraanMessage from "../../../hooks/useQuraanMessage";
+import { t } from "i18next";
 
 export default function QuraanMessageContent() {
   const [messageIsOpen, setMessageIsOpen] = useState(false);
@@ -41,6 +42,7 @@ export default function QuraanMessageContent() {
             }}
           >
             Your Daily Message
+            {t("dailyMessage")}
           </Typography>
           <Card
             sx={{

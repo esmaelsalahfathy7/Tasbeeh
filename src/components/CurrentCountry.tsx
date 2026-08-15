@@ -19,9 +19,7 @@ export default function CurrentCountry({
 
   const currentTime = dayjs().tz(timeZone).format("hh:mm A");
   const nextPrayerTitle =
-    currentStatus?.next_prayer !== "none"
-      ? currentStatus?.next_prayer
-      : "Fajr";
+    currentStatus?.next_prayer !== "none" ? currentStatus?.next_prayer : "Fajr";
 
   return (
     <>
