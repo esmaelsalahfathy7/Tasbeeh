@@ -35,7 +35,7 @@ const cards = [
   {
     id: 0,
     icon: <WbTwilightIcon />,
-    pray: "Fajer",
+    pray: "Fajr",
     time: "00:00",
   },
   {
@@ -78,13 +78,12 @@ export default function PrayerTimesCards({
   const { t, i18n } = useTranslation();
 
   const { prayerTimesData, currentStatus } = usePrayerTimeData();
+
   const { settings } = useSettingsData();
   const currentDate = dayjs().format("dddd, D MMMM ");
 
   const nextPrayer =
-    currentStatus?.next_prayer !== "none"
-      ? currentStatus?.next_prayer
-      : "fajer";
+    currentStatus?.next_prayer !== "none" ? currentStatus?.next_prayer : "Fajr";
   type PrayerKey = keyof typeof prayerTimesData;
   let data: { id: number; icon: ReactNode; pray: string; time: string }[] =
     cards;

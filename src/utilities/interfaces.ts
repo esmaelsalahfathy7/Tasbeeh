@@ -1,7 +1,7 @@
 export interface PryerTimes {
   asr: string;
   dhuhr: string;
-  fajer: string;
+  fajr: string;
   imsak: string;
   isha: string;
   maghrib: string;
@@ -9,7 +9,7 @@ export interface PryerTimes {
 }
 
 export type PrayerKey =
-  | "fajer"
+  | "fajr"
   | "sunrise"
   | "dhuhr"
   | "asr"

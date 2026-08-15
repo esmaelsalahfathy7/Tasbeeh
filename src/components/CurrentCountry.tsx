@@ -15,13 +15,13 @@ export default function CurrentCountry({
   summarized?: boolean;
 }) {
   const { t, i18n } = useTranslation();
-  const { location, currentStatus } = usePrayerTimeData();
+  const { location, currentStatus, timeZone } = usePrayerTimeData();
 
-  const currentTime = dayjs().format("hh:mm A");
+  const currentTime = dayjs().tz(timeZone).format("hh:mm A");
   const nextPrayerTitle =
     currentStatus?.next_prayer !== "none"
       ? currentStatus?.next_prayer
-      : "Fajer";
+      : "Fajr";
 
   return (
     <>
@@ -173,6 +173,8 @@ export default function CurrentCountry({
                   alignItems: "center",
                 }}
               >
+                <Typography variant="caption">{currentTime}</Typography>
+
                 <Typography
                   variant="subtitle2"
                   sx={{

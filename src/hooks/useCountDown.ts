@@ -16,11 +16,21 @@ function getSecondsToNextPrayer(
   let nextPrayTime;
   const currentTime = dayjs().tz(timeZone);
   if (nextPrayerTitle === "none") {
-    nextPrayTime = dayjs.tz(
-      `${currentTime.add(1, "day").format("YYYY-MM-DD")} ${prayerTimesData?.fajer}`,
-      "YYYY-MM-DD HH:mm",
-      timeZone,
-    );
+    const tomorrow = dayjs().tz(timeZone).add(1, "day").startOf("day");
+
+    if (currentTime.isBefore(tomorrow)) {
+      nextPrayTime = dayjs.tz(
+        `${currentTime.add(1, "day").format("YYYY-MM-DD")} ${prayerTimesData?.fajr}`,
+        "YYYY-MM-DD HH:mm",
+        timeZone,
+      );
+    } else {
+      nextPrayTime = dayjs.tz(
+        `${currentTime.format("YYYY-MM-DD")} ${prayerTimesData?.fajr}`,
+        "YYYY-MM-DD HH:mm",
+        timeZone,
+      );
+    }
   } else {
     nextPrayTime = dayjs(prayerTimesData?.[nextPrayerTitle], "HH:mm");
   }

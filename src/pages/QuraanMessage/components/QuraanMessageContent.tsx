@@ -1,26 +1,24 @@
-import { Box, Container, Typography } from "@mui/material";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import { Avatar } from "@mui/material";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import {
+  Avatar,
+  Box,
+  Card,
+  CardContent,
+  Container,
+  Typography,
+} from "@mui/material";
 import TouchAppOutlinedIcon from "@mui/icons-material/TouchAppOutlined";
+import { goUp } from "../../../utilities/animation";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
-import { useState, useEffect } from "react";
-import { goUp } from "../utilities/animation";
-import quraanMessage from "../api/quraanMessage";
-import type { Surah } from "../utilities/interfaces";
+import { useState } from "react";
+import useQuraanMessage from "../../../hooks/useQuraanMessage";
 
-export default function QuraanMessage() {
-  const [surah, setSurah] = useState<Surah | null>(null);
-
+export default function QuraanMessageContent() {
   const [messageIsOpen, setMessageIsOpen] = useState(false);
+  const { surah } = useQuraanMessage();
   const handleOpenCard = () => {
     setMessageIsOpen(!messageIsOpen);
   };
-
-  useEffect(() => {
-    quraanMessage(setSurah);
-  }, []);
   return (
     <>
       <div style={{ minHeight: "calc(100vh - 70px)" }}>

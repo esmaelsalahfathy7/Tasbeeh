@@ -3,6 +3,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import type { SelectChangeEvent } from "@mui/material/Select";
+import { useTranslation } from "react-i18next";
 
 export default function CustomTypeSelection({
   onTypeChange,
@@ -11,6 +12,7 @@ export default function CustomTypeSelection({
   onTypeChange: (type: string) => void;
   selectedType: string;
 }) {
+  const { t } = useTranslation();
   const handleChange = (event: SelectChangeEvent) => {
     onTypeChange(event.target.value);
   };
@@ -29,10 +31,10 @@ export default function CustomTypeSelection({
           onChange={handleChange}
           label="Type"
         >
-          <MenuItem value="SubhanAllah">SubhanAllah</MenuItem>
-          <MenuItem value="Alhamdulillah">Alhamdulillah</MenuItem>
-          <MenuItem value="Allahu Akbar">Allahu Akbar</MenuItem>
-          <MenuItem value="La ilaha illallah">La ilaha illallah</MenuItem>
+          <MenuItem value="subhanAllah">{t(`subhanAllah`)}</MenuItem>
+          <MenuItem value="alhamdulillah">{t(`alhamdulillah`)}</MenuItem>
+          <MenuItem value="allahuAkbar">{t(`allahuAkbar`)}</MenuItem>
+          <MenuItem value="laIlahIllaallah">{t(`laIlahIllaallah`)}</MenuItem>
         </Select>
       </FormControl>
     </div>

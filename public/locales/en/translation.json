@@ -19,7 +19,7 @@
   "openTasbeeh": "START TASBEEH",
 
   "timePrayer": "Prayer Times",
-  "fajer": "FAJR",
+  "fajr": "FAJR",
   "sunrise": "SUNRISE",
   "dhuhr": "DHUHR",
   "asr": "ASR",
@@ -46,5 +46,9 @@
   "timeFormatDescription": "12-hour or 24-hour display",
 
   "save": "Save",
-  "saveLoad": "Saving..."
+  "saveLoad": "Saving...",
+  "subhanAllah": "SubhanAllah",
+  "alhamdulillah": "Alhamdulillah",
+  "allahuAkbar": "Allahu Akbar",
+  "laIlahIllaallah": "La ilaha illallah"
 }

@@ -1,16 +1,18 @@
 import { useRef, useState, useEffect } from "react";
-import CustomTabs from "../components/CustomTargetCounts";
-import CustomTypeSelection from "../components/CustomTypeSelection";
+import CustomTabs from "./Components/CustomTargetCounts";
+import CustomTypeSelection from "./Components/CustomTypeSelection";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import Container from "@mui/material/Container";
+import { useTranslation } from "react-i18next";
 
 export default function Tasbeeh() {
+  const { t } = useTranslation();
   const timerRef = useRef<number | null>(null);
   const canTap = useRef(true);
   const [count, setCount] = useState(0);
-  const [selectedType, setSelectedType] = useState("SubhanAllah");
+  const [selectedType, setSelectedType] = useState(t(`subhanAllah`));
   const [targetCount, setTargetCount] = useState<number | null>(null);
 
   const handleTypeChange = (type: string) => {
@@ -91,7 +93,7 @@ export default function Tasbeeh() {
           >
             {count}
             <Typography variant="body1" gutterBottom sx={{ m: 0 }}>
-              {selectedType}
+              {t(selectedType)}
             </Typography>
           </Typography>
         </div>

@@ -19,7 +19,7 @@
   "openTasbeeh": "ابدأ بالذكر",
 
   "timePrayer": "مواقيت الصلاة",
-  "fajer": "الفجر",
+  "fajr": "الفجر",
   "sunrise": "شروق الشمس",
   "dhuhr": "الظهر",
   "asr": "العصر",
@@ -46,5 +46,9 @@
   "timeFormatDescription": "اختر عرض الوقت بنظام 12 أو 24 ساعة",
 
   "save": "حفظ الاعدادت",
-  "saveLoad": "... جاري الحفظ"
+  "saveLoad": "... جاري الحفظ",
+  "subhanAllah": "سبحان الله",
+  "alhamdulillah": "الحمدلله",
+  "allahuAkbar": "الله اكبر",
+  "laIlahIllaallah": "لا اله الا الله"
 }
