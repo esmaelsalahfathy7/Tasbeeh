@@ -17,7 +17,7 @@ function getSecondsToNextPrayer(
   const currentTime = dayjs().tz(timeZone);
   if (nextPrayerTitle === "none") {
     nextPrayTime = dayjs.tz(
-      `${currentTime.add(1, "day").format("YYYY-MM-DD")} ${prayerTimesData?.fajr}`,
+      `${currentTime.add(1, "day").format("YYYY-MM-DD")} ${prayerTimesData?.fajer}`,
       "YYYY-MM-DD HH:mm",
       timeZone,
     );
