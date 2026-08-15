@@ -102,7 +102,7 @@ export default function Settings() {
           <Button
             variant="outlined"
             sx={{
-              mt: 5,
+              my: 5,
               color: "primary.dark",
               borderColor: "primary.dark",
               "&:hover": {
