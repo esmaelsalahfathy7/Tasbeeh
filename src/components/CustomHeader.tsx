@@ -70,10 +70,7 @@ export default function CustomHeader() {
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
           {/* Desktop Logo */}
           <Typography
-            variant="h2"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
             sx={(theme) => ({
               mr: 2,
               display: { xs: "none" },
